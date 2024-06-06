@@ -1,0 +1,21 @@
+﻿Build started 6/6/2024 4:12:37 PM.
+     1>Project "D:\VSStudio\BMIApplicationMFC\BMIApplicationMFC\BMIApplicationMFC.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\BMIApplicationMFC.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BMIApplicationMFCDlg.cpp
+         BMIApplicationMFCDlg.cpp
+     1>d:\vsstudio\bmiapplicationmfc\bmiapplicationmfc\bmiapplicationmfcdlg.cpp(234): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>d:\vsstudio\bmiapplicationmfc\bmiapplicationmfc\bmiapplicationmfcdlg.cpp(235): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>d:\vsstudio\bmiapplicationmfc\bmiapplicationmfc\bmiapplicationmfcdlg.cpp(270): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>d:\vsstudio\bmiapplicationmfc\bmiapplicationmfc\bmiapplicationmfcdlg.cpp(275): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>d:\vsstudio\bmiapplicationmfc\bmiapplicationmfc\bmiapplicationmfcdlg.cpp(259): warning C4101: 'e' : unreferenced local variable
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\VSStudio\BMIApplicationMFC\Debug\BMIApplicationMFC.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\VSStudio\BMIApplicationMFC\Debug\BMIApplicationMFC.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\VSStudio\BMIApplicationMFC\Debug\BMIApplicationMFC.lib" /MACHINE:X86 Debug\BMIApplicationMFC.res
+         Debug\BMIApplicationMFC.obj
+         Debug\BMIApplicationMFCDlg.obj
+         Debug\stdafx.obj
+         BMIApplicationMFC.vcxproj -> D:\VSStudio\BMIApplicationMFC\Debug\BMIApplicationMFC.exe
+     1>Done Building Project "D:\VSStudio\BMIApplicationMFC\BMIApplicationMFC\BMIApplicationMFC.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.69
