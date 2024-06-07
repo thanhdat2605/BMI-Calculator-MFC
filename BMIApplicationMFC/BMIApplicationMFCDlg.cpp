@@ -6,7 +6,7 @@
 #include "BMIApplicationMFC.h"
 #include "BMIApplicationMFCDlg.h"
 #include "afxdialogex.h"
-
+#include "HelpDlg.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -39,6 +39,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 }
 
+
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
@@ -62,7 +63,8 @@ void CBMIApplicationMFCDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBOX_WEIGHT, combo_weight_);
 	DDX_Control(pDX, IDC_EDT_RESULT, edt_bmi_);
 	DDX_Control(pDX, IDC_EDT_CATEGORY, edt_category_);
-	DDX_Control(pDX, IDC_STT_TITLE, m_staticText);
+
+	DDX_Control(pDX, IDC_STT_TITLE, m_staticFontTitle);
 }
 
 BEGIN_MESSAGE_MAP(CBMIApplicationMFCDlg, CDialogEx)
@@ -71,6 +73,7 @@ BEGIN_MESSAGE_MAP(CBMIApplicationMFCDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BTN_RESET, &CBMIApplicationMFCDlg::OnBnClickedBtnReset)
 	ON_BN_CLICKED(IDC_BTN_CAL, &CBMIApplicationMFCDlg::OnBnClickedBtnCal)
+	ON_BN_CLICKED(IDC_BTN_HELP, &CBMIApplicationMFCDlg::OnBnClickedBtnHelp)
 END_MESSAGE_MAP()
 
 
@@ -105,28 +108,6 @@ BOOL CBMIApplicationMFCDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-	// TODO: Add extra initialization here
-	//CWnd* lblTitle = GetDlgItem(IDC_STT_TITLE);
-	//CFont font;
-	//font.CreateFont(
-	//	12,                        // nHeight
-	//	0,                         // nWidth
-	//	0,                         // nEscapement
-	//	0,                         // nOrientation
-	//	FW_NORMAL,                 // nWeight
-	//	FALSE,                     // bItalic
-	//	FALSE,                     // bUnderline
-	//	0,                         // cStrikeOut
-	//	ANSI_CHARSET,              // nCharSet
-	//	OUT_DEFAULT_PRECIS,        // nOutPrecision
-	//	CLIP_DEFAULT_PRECIS,       // nClipPrecision
-	//	DEFAULT_QUALITY,           // nQuality
-	//	DEFAULT_PITCH | FF_SWISS,  // nPitchAndFamily
-	//	_T("Microsoft Sans Serif"));                 // lpszFacename
-
-	//GetDlgItem(IDC_STT_TITLE)->SetFont(&font);
-
-
 	combo_weight_.AddString(_T("Kilograms"));
 	combo_weight_.AddString(_T("Pounds"));
 	combo_height_.AddString(_T("Meters"));
@@ -134,9 +115,10 @@ BOOL CBMIApplicationMFCDlg::OnInitDialog()
 	combo_weight_.SetCurSel(0);
 	combo_height_.SetCurSel(0);
 
-	CDialog::OnInitDialog();
+	/*CDialog::OnInitDialog();*/
 
-	m_font.CreatePointFont(120, _T("Arial"));
+	m_fontTitle.CreatePointFont(200, _T("‚l‚r ƒSƒVƒbƒN"));
+	m_staticFontTitle.SetFont(&m_fontTitle);
 
 
 
@@ -202,6 +184,7 @@ void CBMIApplicationMFCDlg::OnBnClickedBtnReset()
 	edt_category_.SetWindowText(_T(""));
 	combo_height_.SetCurSel(0);
 	combo_weight_.SetCurSel(0);
+	GetDlgItem(IDC_EDT_HEIGHT)->SetFocus();
 }
 
 CString GetBMICategory(double bmi)
@@ -280,5 +263,75 @@ void CBMIApplicationMFCDlg::OnBnClickedBtnCal()
 	UpdateData(FALSE);
 
 }
+
+void CBMIApplicationMFCDlg::OnBnClickedBtnHelp()
+{
+	HelpDlg help_dlg;
+	help_dlg.DoModal();
+}
+
+
+BOOL CBMIApplicationMFCDlg::PreTranslateMessage(MSG* pMsg)
+{
+	if (pMsg->message == WM_KEYDOWN)
+	{
+		if (pMsg->wParam == VK_RETURN)
+		{
+			OnBnClickedBtnCal();
+			return TRUE;
+		}
+		else if (pMsg->wParam == VK_ESCAPE)
+		{
+			OnBnClickedBtnReset();
+			return TRUE;
+		}
+		else if (pMsg->wParam == VK_F1)
+		{
+			OnBnClickedBtnHelp();
+			return TRUE;
+		}
+		else if ((pMsg->wParam >= '1' && pMsg->wParam <= '2') &&
+			(GetFocus()->IsKindOf(RUNTIME_CLASS(CComboBox))))
+		{
+			int index = pMsg->wParam - '1';
+			CComboBox* pComboBox = (CComboBox*)GetFocus();
+			if (index < pComboBox->GetCount())
+			{
+				pComboBox->SetCurSel(index);
+				return TRUE;
+			}
+		}
+	}		
+
+	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+BOOL CBMIApplicationMFCDlg::OnHelpInfo(HELPINFO* pHelpInfo)
+{
+	if ((pHelpInfo->iContextType == HELPINFO_WINDOW) && (pHelpInfo->iCtrlId == 0))
+	{
+		HelpDlg help_dlg;
+		help_dlg.DoModal();
+		return TRUE;
+	}
+
+	return CDialogEx::OnHelpInfo(pHelpInfo);
+}
+
+void CBMIApplicationMFCDlg::WinHelp(DWORD dwData, UINT nCmd)
+{
+	// dwData depends on which ID,IDD, IDC,... your mouse cursor is
+	// This Value is the ID,IDD,IDC,... hex value plus a hex value for
+	// the type of the element( see below)
+
+	//TRACE("Default Winhelp with ID = %x\n", dwData);
+	//CWinApp* theApp = AfxGetApp();
+	//CString helpFilePath = theApp->m_pszHelpFilePath;
+
+	//// If you like to use Winhelp with another window style
+	//helpFilePath += ">WindowStyleName";
+	//::WinHelp(m_hWnd, helpFilePath, nCmd, dwData);
+}
+
 
 

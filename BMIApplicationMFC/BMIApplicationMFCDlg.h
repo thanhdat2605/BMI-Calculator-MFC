@@ -19,6 +19,8 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
+	
+
 
 // Implementation
 protected:
@@ -26,6 +28,9 @@ protected:
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
+
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
@@ -39,6 +44,13 @@ protected:
 public:
 	afx_msg void OnBnClickedBtnReset();
 	afx_msg void OnBnClickedBtnCal();
-	CStatic m_staticText;
-	CFont m_font;
+	afx_msg void OnBnClickedBtnHelp();
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
+	void WinHelp(DWORD dwData, UINT nCmd);
+	CStatic m_staticFontTitle;
+	CStatic m_staticFontContent;
+	CFont m_fontTitle;
+	CFont m_fontContent;
+
 };
+
