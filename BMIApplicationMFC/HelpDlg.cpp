@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "BMIApplicationMFC.h"
+#include "Main.h"
 #include "HelpDlg.h"
 #include "afxdialogex.h"
 
@@ -48,6 +48,7 @@ BOOL HelpDlg::OnInitDialog()
 
 BEGIN_MESSAGE_MAP(HelpDlg, CDialogEx)
 
+	// ON_STN_CLICKED(IDC_STT_TITLE, &HelpDlg::OnStnClickedSttTitle)
 END_MESSAGE_MAP()
 
 
